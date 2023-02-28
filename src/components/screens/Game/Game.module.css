@@ -1,0 +1,10 @@
+.game {
+  width: 414px;
+  height: 480px;
+  background-color: var(--color-primary);
+  border-left: var(--color-white) solid 4px;
+  border-right: var(--color-primarydarker) solid 4px;
+  border-top: var(--color-white) solid 4px;
+  border-bottom: var(--color-primarydarker) solid 4px;
+  padding: 7px;
+}

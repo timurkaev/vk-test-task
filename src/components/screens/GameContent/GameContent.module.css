@@ -1,0 +1,10 @@
+.content {
+  display: grid;
+  grid-template-columns: repeat(16, 24px);
+  grid-template-rows: repeat(16, 24px);
+
+  border-right: var(--color-white) solid 4px;
+  border-left: var(--color-primarydarker) solid 4px;
+  border-bottom: var(--color-white) solid 4px;
+  border-top: var(--color-primarydarker) solid 4px;
+}

@@ -1,0 +1,26 @@
+:root {
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-primarydarker: #808080;
+  --color-primary: #c6c6c6;
+  --color-red: #ff0000;
+  --color-reddarker: #800000;
+  --color-bluelight: #008080;
+  --color-blue: #0000ff;
+  --color-bluedarker: #000080;
+  --color-green: #008000;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  max-width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

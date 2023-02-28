@@ -1,0 +1,65 @@
+.cell {
+  width: 24px;
+  height: 24px;
+  background-color: var(--color-primary);
+  border-left: var(--color-white) solid 3px;
+  border-right: var(--color-primarydarker) solid 3px;
+  border-top: var(--color-white) solid 3px;
+  border-bottom: var(--color-primarydarker) solid 3px;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cell:active {
+  border-left: var(--color-primarydarker) solid 3px;
+  border-right: var(--color-white) solid 3px;
+  border-top: var(--color-primarydarker) solid 3px;
+  border-bottom: var(--color-white) solid 3px;
+}
+
+.visible {
+  border: 1px solid var(--color-primarydarker);
+}
+
+.visible span {
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.value1 {
+  color: var(--color-blue);
+}
+
+.value2 {
+  color: var(--color-green);
+}
+
+.value3 {
+  color: var(--color-red);
+}
+
+.value4 {
+  color: var(--color-bluedarker);
+}
+
+.value5 {
+  color: var(--color-reddarker);
+}
+
+.value6 {
+  color: var(--color-bluelight);
+}
+
+.value7 {
+  color: var(--color-black);
+}
+
+.value8 {
+  color: var(--color-primarydarker);
+}
+
+.red {
+  background-color: var(--color-red);
+}
