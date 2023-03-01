@@ -4,7 +4,10 @@
 В процессе выполнения научился играть в эту игру :)
 
 ## Getting started
-### Clone repo: `git clone https://github.com/timurkaev/vk-test-task`
-### Install dependencies `yarn install`
-### Start development `yarn start`
+### Clone repo: 
+`git clone https://github.com/timurkaev/vk-test-task`
+### Install dependencies 
+`yarn install`
+### Start development 
+`yarn start`
  
