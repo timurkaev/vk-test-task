@@ -3,7 +3,6 @@ import React, { type FC } from "react";
 
 import styles from "./GameHeader.module.css";
 
-import { Emoji } from "../../../types";
 import { Numbers } from "../../ui/Numbers/Numbers";
 
 interface IGameHeaderProps {

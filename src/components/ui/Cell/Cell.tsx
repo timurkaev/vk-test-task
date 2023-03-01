@@ -1,9 +1,10 @@
-import React, { type FC, useMemo } from "react";
+import React, { type FC } from "react";
 import type { ICellProps } from "./Cell.props";
 
 import cn from "classnames";
 import styles from "./Cell.module.css";
-import { CellState, CellValue } from "../../../types";
+import { CellState } from "../../../types";
+import { renderContent } from "./utlis/renderContent";
 
 export const Cell: FC<ICellProps> = ({
   row,
@@ -16,22 +17,6 @@ export const Cell: FC<ICellProps> = ({
   onMouseDownEmoji,
   onMouseUpEmoji,
 }): JSX.Element => {
-  const renderContent = useMemo((): JSX.Element | null => {
-    if (state === CellState.visible) {
-      if (value === CellValue.bomb) {
-        return <span>💣</span>;
-      } else if (value === CellValue.none) {
-        return null;
-      }
-      return <span>{value}</span>;
-    } else if (state === CellState.flagged) {
-      return <span>🚩</span>;
-    } else if (state === CellState.question) {
-      return <span>❔</span>;
-    }
-    return null;
-  }, [state, value]);
-
   return (
     <button
       onMouseDown={onMouseDownEmoji}
@@ -43,7 +28,7 @@ export const Cell: FC<ICellProps> = ({
         [styles.red]: red,
       })}
     >
-      {renderContent}
+      {renderContent(state, value)}
     </button>
   );
 };

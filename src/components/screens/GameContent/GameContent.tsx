@@ -13,7 +13,10 @@ interface IGameContentProps {
     colParam: number
   ): (...args: unknown[]) => void;
   cells: ICells[][];
-  onContext(rowParam: number, colParam: number): (...args: any[]) => void;
+  onContext(
+    rowParam: number,
+    colParam: number
+  ): (e: MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   hasLost: boolean;
   hasWon: boolean;
   onMouseDownEmoji: (e: MouseEvent<HTMLButtonElement>) => void;

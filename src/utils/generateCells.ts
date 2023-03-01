@@ -132,6 +132,7 @@ export const generateCells = (): ICells[][] => {
   return cells;
 };
 
+// Opening empty cells next to the treasures we clicked on
 export const openMultipleCells = (
   cells: ICells[][],
   rowParam: number,
