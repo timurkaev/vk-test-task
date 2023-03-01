@@ -12,7 +12,7 @@ const grabAllAdjacentCells = (
   const topCell = rowParam > 0 ? cells[rowParam - 1][colParam] : null;
   const topRightCell =
     rowParam > 0 && colParam < MAX_COLS - 1
-      ? cells[rowParam - 1][colParam - 1]
+      ? cells[rowParam - 1][colParam + 1]
       : null;
   const leftCell = colParam > 0 ? cells[rowParam][colParam - 1] : null;
   const rightCell =
