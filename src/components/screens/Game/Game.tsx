@@ -13,13 +13,12 @@ export const Game: FC = (): JSX.Element => {
   const [emoji, setEmoji] = useState<Emoji>(Emoji.smile);
   const [time, setTime] = useState<number>(0);
   const [isLive, setIsLive] = useState<boolean>(false);
-  const [cells, setCells] = useState(generateCells());
+  const [cells, setCells] = useState<ICells[][]>(generateCells());
   const [bombCounter, setBombCounter] = useState<number>(40);
   const [hasLost, setHasLost] = useState<boolean>(false);
   const [hasWon, setHasWon] = useState<boolean>(false);
 
   const handleCellClick = (rowParam: number, colParam: number) => (): void => {
-    const currenCell = cells[rowParam][colParam];
     let newCells = cells.slice();
     if (!isLive) {
       let isABomb = newCells[rowParam][colParam].value === CellValue.bomb;
@@ -34,7 +33,10 @@ export const Game: FC = (): JSX.Element => {
       setIsLive(true);
     }
     const currentCell = newCells[rowParam][colParam];
-    if ([CellState.flagged, CellState.visible].includes(currentCell.state)) {
+    if (
+      [CellState.flagged, CellState.visible].includes(currentCell.state) ||
+      [CellState.question, CellState.visible].includes(currentCell.state)
+    ) {
       return;
     }
     if (currentCell.value === CellValue.bomb) {
@@ -83,21 +85,6 @@ export const Game: FC = (): JSX.Element => {
   };
 
   useEffect(() => {
-    const handleMouseDown = (): void => {
-      setEmoji(Emoji.click);
-    };
-    const handleMouseUp = () => {
-      setEmoji(Emoji.smile);
-    };
-    window.addEventListener("mousedown", handleMouseDown);
-    window.addEventListener("mouseup", handleMouseUp);
-
-    return () => {
-      window.removeEventListener("mousedown", handleMouseDown);
-    };
-  }, []);
-
-  useEffect(() => {
     if (isLive && time < 999) {
       const timer = setInterval(() => {
         setTime(time + 1);
@@ -123,14 +110,29 @@ export const Game: FC = (): JSX.Element => {
     }
   }, [hasWon]);
 
-  const onEmojiClick = () => {
-    setIsLive(false);
-    setTime(0);
-    setCells(generateCells());
-    setHasLost(false);
-    setHasWon(false);
+  const onEmojiClick = (e: MouseEvent<HTMLButtonElement>): void => {
+    if (e.button === 0) {
+      setEmoji(Emoji.click);
+      setIsLive(false);
+      setTime(0);
+      setCells(generateCells());
+      setHasLost(false);
+      setHasWon(false);
+      setBombCounter(40);
+    }
   };
 
+  const handleEmojiUp = (e: MouseEvent<HTMLButtonElement>): void => {
+    if (e.button === 0) {
+      setEmoji(Emoji.smile);
+    }
+  };
+
+  const handleEmojiDown = (e: MouseEvent<HTMLButtonElement>): void => {
+    if (e.button === 0) {
+      setEmoji(Emoji.click);
+    }
+  };
   const handleCellContext =
     (rowParam: number, colParam: number) =>
     (e: MouseEvent<HTMLButtonElement, MouseEvent>): void => {
@@ -149,9 +151,12 @@ export const Game: FC = (): JSX.Element => {
         setCells(currentCells);
         setBombCounter((prev) => prev - 1);
       } else if (currentCell.state === CellState.flagged) {
-        currentCells[rowParam][colParam].state = CellState.open;
+        currentCells[rowParam][colParam].state = CellState.question;
         setCells(currentCells);
         setBombCounter((prev) => prev + 1);
+      } else if (currentCell.state === CellState.question) {
+        currentCells[rowParam][colParam].state = CellState.open;
+        setCells(currentCells);
       }
     };
 
@@ -173,12 +178,17 @@ export const Game: FC = (): JSX.Element => {
   return (
     <div className={styles.game}>
       <GameHeader
+        onEmojiMouseUp={handleEmojiUp}
         bombCounter={bombCounter}
         onEmojiClick={onEmojiClick}
         time={time}
         emoji={emoji}
       />
       <GameContent
+        onMouseDownEmoji={handleEmojiDown}
+        onMouseUpEmoji={handleEmojiUp}
+        hasWon={hasWon}
+        hasLost={hasLost}
         onContext={handleCellContext}
         cells={cells}
         handleCellClick={handleCellClick}

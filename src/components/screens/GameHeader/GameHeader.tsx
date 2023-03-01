@@ -1,13 +1,16 @@
+import type { MouseEvent } from "react";
 import React, { type FC } from "react";
 
 import styles from "./GameHeader.module.css";
 
 import { Emoji } from "../../../types";
+import { Numbers } from "../../ui/Numbers/Numbers";
 
 interface IGameHeaderProps {
   emoji: string;
   time: number;
-  onEmojiClick: () => void;
+  onEmojiClick: (e: MouseEvent<HTMLButtonElement>) => void;
+  onEmojiMouseUp: (e: MouseEvent<HTMLButtonElement>) => void;
   bombCounter: number;
 }
 
@@ -16,16 +19,19 @@ export const GameHeader: FC<IGameHeaderProps> = ({
   time,
   onEmojiClick,
   bombCounter,
+  onEmojiMouseUp,
 }): JSX.Element => {
   return (
     <header className={styles.header}>
-      <div className={styles.counter}>
-        {bombCounter.toString().padStart(3, "0")}
-      </div>
-      <button onClick={onEmojiClick} className={styles.emoji}>
-        {emoji}
+      <Numbers value={bombCounter} />
+      <button
+        onMouseDown={onEmojiClick}
+        onMouseUp={onEmojiMouseUp}
+        className={styles.emoji}
+      >
+        <span>{emoji}</span>
       </button>
-      <div className={styles.counter}>{time.toString().padStart(3, "0")}</div>
+      <Numbers value={time} />
     </header>
   );
 };

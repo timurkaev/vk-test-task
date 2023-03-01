@@ -21,6 +21,7 @@ export enum CellState {
   open,
   visible,
   flagged,
+  question,
 }
 
 export enum Emoji {

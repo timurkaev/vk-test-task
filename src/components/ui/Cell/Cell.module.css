@@ -21,6 +21,7 @@
 
 .visible {
   border: 1px solid var(--color-primarydarker);
+  pointer-events: none;
 }
 
 .visible span {

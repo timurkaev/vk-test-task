@@ -1,4 +1,5 @@
 import type { CellState, CellValue } from "../../../types";
+import type { MouseEvent } from "react";
 import { MouseEventHandler } from "react";
 
 export interface ICellProps {
@@ -9,4 +10,6 @@ export interface ICellProps {
   onClick(rowParam: number, colParam: number): (...args: unknown[]) => void;
   onContext(rowParam: number, colParam: number): (...args: any[]) => void;
   red?: boolean;
+  onMouseDownEmoji: (e: MouseEvent<HTMLButtonElement>) => void;
+  onMouseUpEmoji: (e: MouseEvent<HTMLButtonElement>) => void;
 }

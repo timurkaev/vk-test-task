@@ -7,4 +7,11 @@
   border-left: var(--color-primarydarker) solid 4px;
   border-bottom: var(--color-white) solid 4px;
   border-top: var(--color-primarydarker) solid 4px;
+
+  user-select: none;
+}
+
+.lost,
+.won {
+  pointer-events: none;
 }
